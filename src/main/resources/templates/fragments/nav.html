@@ -1,0 +1,63 @@
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-front">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">ARTICLES MANAGEMENT</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item active" th:each="page : ${cpages}" th:if="${page.slug != 'home'}">
+          <a class="nav-link" th:href="@{'/' + ${page.slug}}" th:text="${page.title}"></a>
+        </li>
+
+        <a style="color: white; margin-left: 10px; margin-right: 10px;" th:href="@{/admin/stat/view}">STAT VIEW</a>
+        <a style="color: white; margin-left: 10px; margin-right: 10px;" th:href="@{/admin/stat}">STAT RETURN</a>
+        <a style="color: white; margin-left: 10px; margin-right: 10px;" th:href="@{/articles}">LIST ARTICLES</a>
+  
+      </ul>
+
+      <a th:if="${principal == 'admin'}" style="color:white; margin-right: 20px;" href="/admin/products">Go to Admin Section</a>
+
+      <ul class="float-right navbar-nav" th:if="${principal == null}">
+        <li class="nav-item active">
+          <a th:href="@{/register}" class="nav-link">Register</a>
+        </li>
+        <li class="nav-item active">
+          <a th:href="@{/login}" class="nav-link">Login</a>
+        </li>
+      </ul>
+
+      <form class="float-right" th:if="${principal != null}" method="post" th:action="@{/logout}">
+        <span class="text-white" th:text="${'Hi, ' + principal}"></span>
+        <button class="btn btn-secondary">Logout</button>
+      </form>
+
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-admin">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" target="_blank">HOME PAGE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0" >
+
+        <a style="color: white; margin-left: 10px; margin-right: 10px;" th:href="@{/admin/stat/view}">STAT VIEW</a>
+        <a style="color: white; margin-left: 10px; margin-right: 10px;" th:href="@{/admin/stat}">STAT RETURN</a>
+        <a style="color: white; margin-left: 10px; margin-right: 10px;" th:href="@{/articles}">LIST ARTICLES</a>
+
+      </ul>
+      <!-- <a th:if="${principal == 'admin'}" class="float-right" style="color:white; margin-right: 20px;" href="/admin/products">Go to Admin Section</a> -->
+
+      <form class="float-right" method="post" th:action="@{/logout}">
+        <!-- <span class="text-white" th:text="${'Hi, ' + principal}"></span> -->
+        <button class="btn btn-secondary">Logout</button>
+      </form>
+    </div>
+  </div>
+</nav>
