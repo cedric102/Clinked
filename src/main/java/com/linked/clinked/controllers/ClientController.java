@@ -90,33 +90,5 @@ public class ClientController extends DatabaseManagement {
             return mv;
 
       }
-
-      @GetMapping("/count")
-      public long countArticles() {
-            return articleRepo.count();
-      }
-
-      public String saveArticle(Integer id, String title, String author, String content) {
-            Article art = new Article();
-            System.out.println(id);
-            art.setId(id);
-            System.out.println(title);
-            art.setTitle(title);
-            System.out.println(author);
-            art.setAuthor(author);
-            System.out.println(content);
-            art.setContent(content);
-
-            LocalDateTime date = LocalDateTime.now();
-            art.setPublishedDate(date);
-            System.out.println(date);
-            System.out.println(art);
-            articleRepo.save(art);
-            try {
-                  articleRepo.save(art);
-            } catch (Exception e) {
-                  return "Could not save in the Repository";
-            }
-            return art.toString();
-      }
+      
 }

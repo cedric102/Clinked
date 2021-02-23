@@ -7,6 +7,7 @@
 
   <nav th:replace="/fragments/nav :: nav-admin"></nav>
 
+  <!-- List all the articles in the current page -->
   <table>
     <tr>
       <th style="padding-left: 20px;">ID</th>
@@ -24,6 +25,7 @@
     </tr>
   </table>
 
+  <!-- List all the pages and the current page -->
   <nav class="mt-3" th:if="${ count > perPage }">
     <ul class="pagination">
       <li class="page-item" th:if="${ page > 0 }">
@@ -39,7 +41,10 @@
     </ul>
   </nav>
 
+  <!-- Notify if the article already exists -->
   <div style="color: red;" th:if="${AlreadyExists}">The Article Already Exists</div>
+
+  <!-- Fill the Form to add an article to the database -->
   <form method="post" th:object="${article}" th:action="@{/admin/stat/add}">
     <div style="display: inline-block;">
       <label for="">Title</label>
@@ -59,12 +64,7 @@
     <button class="btn btn-danger mb-5">Add</button>
   </form>
 
-  <!-- <div th:each="article1: ${articleListBetweenTimes}">
-      <div style="display: inline-block;" th:text="${article1.key}"></div>
-      <div style="display: inline-block;" th:text="${article1.value}"></div>
-      <br>
-    </div> -->
-
+  <!-- Present he statistics for the past week -->
   <div th:if="${articleListBetweenTimes}" style="position: relative; top: 50px;" class="container">
     <h2>STATISTICS FOR THE PAST WEEK</h2>
 
